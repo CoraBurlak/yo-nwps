@@ -1,0 +1,11 @@
+<rms-detail *ngIf="detailOptions" [options]="detailOptions">
+    <div class="detail-header">
+      <div class="row">
+        <<%= moduleName %>-header></<%= moduleName %>-header>
+      </div>
+    </div>
+    <div class="module-navigator-buttons">
+      <field-level-audit-button [options]="detailOptions"></field-level-audit-button>
+      <delete-record-button [options]="deleteOptions"></delete-record-button>
+    </div>
+</rms-detail>

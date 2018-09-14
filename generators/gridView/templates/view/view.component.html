@@ -1,0 +1,21 @@
+<nws-ui-grid-component *ngIf="<%= moduleNameCamel %><%= sectionNameNoDashSingular %>GridController" [nwsCtrl]="<%= moduleNameCamel %><%= sectionNameNoDashSingular %>GridController"></nws-ui-grid-component>
+<div class="module-subcontent-body-padded" *ngIf="selectedView">
+    <div class="row module-subcontent-field-row">
+        <div class="col-xs-6 uniform-height-view">
+            <div class="module-subcontent-field-header">Your Header Here</div>
+            <div class="module-subcontent-field">{{selectedView?.yourValueHere}}</div>
+        </div>
+        <div class="col-xs-6 uniform-height-view">
+            <div class="module-subcontent-field-header">Your Header Here</div>
+            <div class="module-subcontent-field">{{selectedView?.yourValueHere}}</div>
+        </div>
+        <div class="col-xs-6 uniform-height-view">
+            <div class="module-subcontent-field-header">Your Header Here</div>
+            <div class="module-subcontent-field">{{selectedView?.yourValueHere}}</div>
+        </div>
+        <div class="col-xs-6 uniform-height-view">
+            <div class="module-subcontent-field-header">Your Header Here</div>
+            <div class="module-subcontent-field">{{selectedView?.yourValueHere}}</div>
+        </div>
+    </div>
+</div>

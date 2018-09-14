@@ -1,0 +1,31 @@
+{
+  "version": "2.9.2",
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowJs": false,
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "no-unused-expression": true,
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "include": [
+    "*.ts",
+  ],
+  "exclude": [
+  ],
+  "angularCompilerOptions": {
+    "annotationsAs": "decorators",
+    "skipMetadataEmit": true
+  },
+  "plugins": [
+  ]
+}
