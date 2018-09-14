@@ -1,3 +1,3 @@
 # generator-nwps
 
-> Scaffolding for the nwps structure
+> Scaffolding for nwps structures
