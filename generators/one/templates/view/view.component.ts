@@ -22,7 +22,7 @@ export class <%= moduleNameNoDash %><%= sectionNameNoDash %>ViewComponent {
 	public options: IOneToOneViewOptions;
 
 	constructor(
-		private _recordFormatUtility: RecordFormatUtility
+		recordFormatUtility: RecordFormatUtility
 	) {
 
 		this.options = {

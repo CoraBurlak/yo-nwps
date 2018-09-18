@@ -32,7 +32,7 @@ import {
 } from '../../../<%= moduleName %>.agent';
 import {
     <%= moduleNameNoDash %><%= sectionNameNoDash %>EditComponent
-} from './<%= moduleName %>-<%= sectionNameCamel %>-edit.component';
+} from './<%= moduleName %>-<%= sectionName %>-edit.component';
 
 describe('<%= moduleNameNoDash %>: <%= moduleNameNoDash %><%= sectionNameNoDash %>EditComponent', () => {
 	let fixture: ComponentFixture<<%= moduleNameNoDash %><%= sectionNameNoDash %>EditComponent>;
@@ -62,7 +62,7 @@ describe('<%= moduleNameNoDash %>: <%= moduleNameNoDash %><%= sectionNameNoDash 
 				{
 					provide: <%= moduleNameNoDash %>Agent,
 					useValue: {
-						get<%= sectionNameNoDash %>: jasmine.createSpy('get<%= sectionNameNoDash %>').and.returnValue(of({})),
+						get<%= sectionNameNoDash %>Detail: jasmine.createSpy('get<%= sectionNameNoDash %>Detail').and.returnValue(of({})),
             save<%= moduleNameNoDash %>: jasmine.createSpy('save<%= moduleNameNoDash %>').and.returnValue(of({})),
             save<%= sectionNameNoDash %>: jasmine.createSpy('save<%= sectionNameNoDash %>').and.returnValue(of({}))
 					}
