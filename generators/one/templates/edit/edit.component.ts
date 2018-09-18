@@ -45,10 +45,10 @@ import {
 } from '../../../contracts/<%= moduleName %>-detail.interface';
 import {
     I<%= moduleNameNoDash %><%= sectionNameNoDash %>Detail
-} from '../../../contracts/<%= moduleName %>-<%= sectionNameCamel %>-detail.interface';
+} from '../../../contracts/<%= moduleName %>-<%= sectionName %>-detail.interface';
 import {
     I<%= moduleNameNoDash %><%= sectionNameNoDash %>
-} from '../../../contracts/<%= moduleName %>-<%= sectionNameCamel %>.interface';
+} from '../../../contracts/<%= moduleName %>-<%= sectionName %>.interface';
 import {
     I<%= moduleNameNoDash %>
 } from '../../../contracts/<%= moduleName %>.interface';
