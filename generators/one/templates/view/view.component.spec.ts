@@ -19,16 +19,16 @@ import {
   I<%= moduleNameNoDash %>Detail
 } from '../../../contracts/<%= moduleName %>-detail.interface';
 import {
-  <%= moduleNameNoDash %>GeneralViewComponent
-} from './<%= moduleName %>-general-view.component';
+  <%= moduleNameNoDash %><%= sectionNameNoDash %>ViewComponent
+} from './<%= moduleName %>-<%= sectionName %>-view.component';
 
-describe('<%= moduleNameNoDash %>: <%= moduleNameNoDash %>GeneralViewComponent', () => {
-  let fixture: ComponentFixture<<%= moduleNameNoDash %>GeneralViewComponent>;
-  let component: <%= moduleNameNoDash %>GeneralViewComponent;
+describe('<%= moduleNameNoDash %>: <%= moduleNameNoDash %><%= sectionNameNoDash %>ViewComponent', () => {
+  let fixture: ComponentFixture<<%= moduleNameNoDash %><%= sectionNameNoDash %>ViewComponent>;
+  let component: <%= moduleNameNoDash %><%= sectionNameNoDash %>ViewComponent;
 
   const <%= moduleNameCamel %>Detail: I<%= moduleNameNoDash %>Detail = {
     agency: { id: 123, value: 'agency' },
-    general: {
+    <%= sectionName %>: {
       // STUB best guess
     },
     id: 1,
@@ -36,7 +36,7 @@ describe('<%= moduleNameNoDash %>: <%= moduleNameNoDash %>GeneralViewComponent',
   };
 
   function createComponent() {
-    fixture = TestBed.createComponent(<%= moduleNameNoDash %>GeneralViewComponent);
+    fixture = TestBed.createComponent(<%= moduleNameNoDash %><%= sectionNameNoDash %>ViewComponent);
     fixture.detectChanges();
     component = fixture.componentInstance;
   }
@@ -47,7 +47,7 @@ describe('<%= moduleNameNoDash %>: <%= moduleNameNoDash %>GeneralViewComponent',
         NwCommonMocksModule
       ],
       declarations: [
-        <%= moduleNameNoDash %>GeneralViewComponent
+        <%= moduleNameNoDash %><%= sectionNameNoDash %>ViewComponent
       ],
       providers: [
         {
@@ -99,49 +99,16 @@ describe('<%= moduleNameNoDash %>: <%= moduleNameNoDash %>GeneralViewComponent',
     it('should have a usage type', () => {
       createComponent();
 
-      expect(component.options.usageTypeId).toBe(UsageType.<%= moduleNameNoDash %>General);
+      expect(component.options.usageTypeId).toBe(UsageType.<%= moduleNameNoDash %><%= sectionNameNoDash %>);
     });
 
     it('should have fieldDefs', () => {
       createComponent();
 
-      expect(component.options.fieldDefs[DisplayField.<%= moduleNameNoDash %>GeneralTransactionDate](<%= moduleNameCamel %>Detail.general)).toBe('1/1/2015 11:00 AM');
-      expect(component.options.fieldDefs[DisplayField.<%= moduleNameNoDash %>GeneralTransactionTime](<%= moduleNameCamel %>Detail.general)).toBe(null);
-      expect(component.options.fieldDefs[DisplayField.<%= moduleNameNoDash %>GeneralTransactionType](<%= moduleNameCamel %>Detail.general)).toBe('Type');
-      expect(component.options.fieldDefs[DisplayField.<%= moduleNameNoDash %>GeneralTicketNumber](<%= moduleNameCamel %>Detail.general)).toBe('12345');
-      expect(component.options.fieldDefs[DisplayField.<%= moduleNameNoDash %>GeneralPawnbroker](<%= moduleNameCamel %>Detail.general)).toBe(25);
-      expect(component.options.fieldDefs[DisplayField.<%= moduleNameNoDash %>GeneralPawnerBuyer](<%= moduleNameCamel %>Detail.general)).toBe(50);
     });
 
     it('should have createViewField', () => {
-      const globalSubjectViewerFactory: GlobalSubjectViewerFactory = TestBed.get(GlobalSubjectViewerFactory);
       createComponent();
-
-      component.options.createViewField(<IPageField>{
-        id: DisplayField.<%= moduleNameNoDash %>GeneralPawnbroker,
-        systemName: '<%= moduleNameCamel %>GeneralPawnbroker',
-        name: 'Pawnbroker'
-      });
-
-      expect(globalSubjectViewerFactory.create).toHaveBeenCalledWith({
-        agencyId: 123,
-        name: '<%= moduleNameCamel %>GeneralPawnbroker',
-        label: 'Pawnbroker',
-        isViewOnly: true
-      });
-
-      component.options.createViewField(<IPageField>{
-        id: DisplayField.<%= moduleNameNoDash %>GeneralPawnerBuyer,
-        systemName: '<%= moduleNameCamel %>GeneralPawnerBuyer',
-        name: 'Pawner/Buyer'
-      });
-
-      expect(globalSubjectViewerFactory.create).toHaveBeenCalledWith({
-        agencyId: 123,
-        name: '<%= moduleNameCamel %>GeneralPawnerBuyer',
-        label: 'Pawner/Buyer',
-        isViewOnly: true
-      });
     });
   });
 });
