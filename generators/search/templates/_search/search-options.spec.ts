@@ -110,7 +110,13 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 					useValue: {
 						confirmWithReasons: jasmine.createSpy('confirmWithReasons')
 					}
-				}
+        },
+        {
+          provide: 'agency-combobox-controller',
+          useValue: (options) => ({
+            options
+          })
+        },
 			]
 		}).compileComponents();
 	});

@@ -50,7 +50,8 @@ export class <%= moduleNameNoDash %>SearchOptions extends SearchOptions {
 		private _pageDetailService: PageDetailService,
 		private _recordLockAgent: RecordLockAgent,
 		private _userPermissionService: UserPermissionService,
-		private _userService: UserService,
+    private _userService: UserService,
+    private AgencyComboboxController: any,
 	) {
 		super(_errorService);
 		this._ctrlOptions.identifier = GridIdentifiers.<%= moduleNameCamel %>Search;

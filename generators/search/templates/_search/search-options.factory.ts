@@ -37,6 +37,7 @@ export class <%= moduleNameNoDash %>SearchOptionsFactory implements ISearchOptio
 		private _recordLockAgent: RecordLockAgent,
 		private _userPermissionService: UserPermissionService,
     private _userService: UserService,
+    @Inject('agency-combobox-controller') private AgencyComboboxController: any,
 	) { }
 
 	public create(config: any) {
@@ -50,7 +51,8 @@ export class <%= moduleNameNoDash %>SearchOptionsFactory implements ISearchOptio
 			this._pageDetailService,
 			this._recordLockAgent,
 			this._userPermissionService,
-			this._userService
+      this._userService,
+      this.AgencyComboboxController
 		);
 	}
 }
