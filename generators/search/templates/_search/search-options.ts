@@ -73,15 +73,13 @@ export class <%= moduleNameNoDash %>SearchOptions extends SearchOptions {
 							return this._userPermissionService.hasAgencyPermission(SecurityComponent.<%= moduleNameNoDash %>, record.agency.id, PermissionType.View);
 						});
 						const rowEntity: I<%= moduleNameNoDash %>SearchResultGridView = options.row.entity;
-						const listItems = ArrayUtility.getBuffer(filteredDatasource, filteredDatasource.findIndex(x => x.id === rowEntity.id), this._breadcrumbBufferSize).map(x => {
-							const listItem: IBreadcrumbListItem = {
+						const listItems: IBreadcrumbListItem[] = ArrayUtility.getBuffer(filteredDatasource, filteredDatasource.findIndex(x => x.id === rowEntity.id), this._breadcrumbBufferSize).map(x => {
+							return {
 								description: `${x.number} (${x.name})`,
 								sourceId: x.id,
 								title: `${x.number}`,
 								routeCommands: this.getDetailRoute(x)
 							};
-
-							return listItem;
 						});
 						const breadcrumb = this._breadcrumbService.getCurrentBreadcrumb();
 						breadcrumb.listItems = listItems;
