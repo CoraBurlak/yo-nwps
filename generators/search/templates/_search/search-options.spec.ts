@@ -42,7 +42,7 @@ import {
 
 describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () => {
   const mockConfig = {
-    searchFn: jasmine.createSpy('searchFn');
+    searchFn: jasmine.createSpy('searchFn')
   };
   const searchResultGridViews: ISearchResponse<I<%= moduleNameNoDash %>SearchResultGridView> = {
     totalResults: '2',
