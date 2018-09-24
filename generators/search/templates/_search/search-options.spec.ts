@@ -79,7 +79,7 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 					provide: <%= moduleNameNoDash %>Agent,
 					useValue: {
             delete<%= moduleNameNoDash %>: jasmine.createSpy('delete<%= moduleNameNoDash %>'),
-          get<%= moduleNameNoDash %> SearchResultGridViews: jasmine.createSpy('get<%= moduleNameNoDash %>SearchResultGridViews').and.returnValue(of(searchResultGridViews))
+            get<%= moduleNameNoDash %> SearchResultGridViews: jasmine.createSpy('get<%= moduleNameNoDash %>SearchResultGridViews').and.returnValue(of(searchResultGridViews))
 					}
 				},
 				{
@@ -130,8 +130,8 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 		it('should compile the options', () => {
       // DELETE THIS TEST ONCE IT COMPILES
 			const factory: <%= moduleNameNoDash %>SearchOptionsFactory = TestBed.get(<%= moduleNameNoDash %>SearchOptionsFactory);
-			const options = factory.create({});
-			expect(options).toBeDefined();
+      const <%= moduleNameCamel %> SearchOptions = factory.create({});
+      expect(<%= moduleNameCamel %> SearchOptions).toBeDefined();
 		});
 	});
 
@@ -258,29 +258,29 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 	});
 
 	describe('pageDetail', () => {
-		let options: <%= moduleNameNoDash %>SearchOptions = null;
+		let <%= moduleNameCamel %>SearchOptions: <%= moduleNameNoDash %>SearchOptions = null;
 
 		beforeEach(() => {
 			const factory: <%= moduleNameNoDash %>SearchOptionsFactory = TestBed.get(<%= moduleNameNoDash %>SearchOptionsFactory);
-			options = factory.create({});
+			<%= moduleNameCamel %>SearchOptions = factory.create({});
 		});
 
 		it('should call the pageDetailService', async(() => {
 			const pageDetailService: PageDetailService = TestBed.get(PageDetailService);
-			options.getPageDetail().subscribe();
+			<%= moduleNameCamel %>SearchOptions.getPageDetail().subscribe();
 			expect(pageDetailService.getPageDetail).toHaveBeenCalledWith(123, PageType.<%= moduleNameNoDash %>Search);
 		}));
 	});
 
 	describe('createField', () => {
-		let options: <%= moduleNameNoDash %>SearchOptions = null;
+		let <%= moduleNameCamel %>SearchOptions: <%= moduleNameNoDash %>SearchOptions = null;
 
 		beforeEach(() => {
 			const factory: <%= moduleNameNoDash %>SearchOptionsFactory = TestBed.get(<%= moduleNameNoDash %>SearchOptionsFactory);
-			options = factory.create({});
+			<%= moduleNameCamel %>SearchOptions = factory.create({});
 		});
 		it('should create the <%= moduleNameNoDash %>SearchAgency field with options', () => {
-			const field = options.createField('', <IPageField>{ id: DisplayField.<%= moduleNameNoDash %>SearchAgency });
+      const field = <%= moduleNameCamel %> SearchOptions.createField('', <IPageField>{ id: DisplayField.<%= moduleNameNoDash %>SearchAgency });
 			expect(field).toBeDefined();
 			expect(field.controller.options.isMultiSelect).toBeTruthy();
 			expect(field.controller.options.filterByPermissions).toBeDefined();
