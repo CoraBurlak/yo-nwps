@@ -218,7 +218,7 @@ export class <%= moduleNameNoDash %>SearchOptions extends SearchOptions {
 			usageTypeIds: UsageType.<%= moduleNameNoDash %>,
 			referenceNumber: item.number
 		};
-		// tODO: http://confab:8080/browse/JUP-5060 Remove hard-coded route path.
+		// TODO: http://confab:8080/browse/JUP-5060 Remove hard-coded route path.
 		return {
 			commands: ['/fieldLevelAudit/search'],
 			extras: {
