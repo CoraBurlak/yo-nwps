@@ -113,10 +113,10 @@ export class <%= moduleNameNoDash %>SearchOptions extends SearchOptions {
 						return !this._userPermissionService.hasAgencyPermission(SecurityComponent.<%= moduleNameNoDash %>, <%= moduleNameCamel %>Agency, PermissionType.Delete);
 					},
 					callBack: callbackOptions => {
-						const <%= moduleNameCamel %>Id = callbackOptions.row.entity.id;
+            const rowEntity: I<%= moduleNameNoDash %>SearchResultGridView = options.row.entity;
 						this._messageBoxService.confirmWithReasons(MessageUtility.getMessage('deleteWithReason'), 'Confirm <%= moduleNameNormalCap %> Delete', 'Delete Entry', 'Don\'t Delete').then((result) => {
-							this.acquireLock(<%= moduleNameCamel %>Id).then(() => {
-								return this._<%= moduleNameCamel %>Agent.delete<%= moduleNameNoDash %>(<%= moduleNameCamel %>Id, result.reason, this._recordLockId).subscribe({
+							this.acquireLock(rowEntity.id).then(() => {
+								return this._<%= moduleNameCamel %>Agent.delete<%= moduleNameNoDash %>(rowEntity.d, result.reason, this._recordLockId).subscribe({
 									next: () => {
 										this._config.searchFn();
 										this.releaseLock();
