@@ -10,6 +10,7 @@ import {
 import {
     ErrorService,
     IPageField,
+    ISearchResponse,
     PageDetailService,
     PageType,
     PermissionType,
@@ -20,12 +21,15 @@ import {
 } from '@nwps/common';
 import {
     BreadcrumbService,
-    FormInteropService
+    FormInteropService,
+    IBreadcrumb
 } from '@nwps/core';
 import {
     DisplayField
 } from '@nwps/records';
-
+import {
+  I<%= moduleNameNoDash %>SearchResultGridView
+} from '../contracts/<%= moduleName %>-search-result-grid-view.interface';
 import {
     <%= moduleNameNoDash %>Agent
 } from '../shared/<%= moduleName %>.agent';
@@ -37,9 +41,13 @@ import {
 } from './<%= moduleName %>-search-options.factory';
 
 describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () => {
-	const mockConfig = {
-		searchFn: jasmine.createSpy('searchFn')
-	};
+  const searchResultGridViews: ISearchResponse<I<%= moduleNameNoDash %>SearchResultGridView> = {
+    totalResults: '2',
+    facets: null,
+    results: [
+      // put your results here.
+    ]
+  };
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			declarations: [
@@ -49,7 +57,6 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 				{
 					provide: BreadcrumbService,
 					useValue: {
-						addBreadcrumb: jasmine.createSpy('addBreadcrumb'),
 						getCurrentBreadcrumb: jasmine.createSpy('getCurrentBreadcrumb'),
 						updateCurrentBreadcrumb: jasmine.createSpy('updateCurrentBreadcrumb')
 					}
@@ -57,7 +64,6 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 				{
 					provide: ErrorService,
 					useValue: {
-						displayErrorMessage: jasmine.createSpy('displayErrorMessage'),
 						processError: jasmine.createSpy('processError')
 					}
 				},
@@ -72,7 +78,8 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 				{
 					provide: <%= moduleNameNoDash %>Agent,
 					useValue: {
-						delete<%= moduleNameNoDash %>: jasmine.createSpy('delete<%= moduleNameNoDash %>')
+            delete<%= moduleNameNoDash %>: jasmine.createSpy('delete<%= moduleNameNoDash %>'),
+          get<%= moduleNameNoDash %> SearchResultGridViews: jasmine.createSpy('get<%= moduleNameNoDash %>SearchResultGridViews').and.returnValue(of(searchResultGridViews))
 					}
 				},
 				{
@@ -91,17 +98,15 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 				{
 					provide: UserPermissionService,
 					useValue: {
-						hasAgencyPermission: jasmine.createSpy('hasAgencyPermission').and.returnValue(true),
-						hasAnyPermission: jasmine.createSpy('hasAnyPermission').and.returnValue(true),
-						getAllAgenciesWithPermission: jasmine.createSpy('getAllAgenciesWithPermission').and.returnValue([123]),
-						hasPermissionsForAnyAgency: jasmine.createSpy('hasPermissionsForAnyAgency').and.returnValue(true)
+						hasAgencyPermission: jasmine.createSpy('hasAgencyPermission').and.returnValue(true)
 					}
 				},
 				{
 					provide: UserService,
 					useValue: {
 						getUser: jasmine.createSpy('getUser').and.returnValue({
-							id: 123
+              id: 123,
+              agencyId: 234
 						})
 					}
 				},
@@ -125,13 +130,13 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 		it('should compile the options', () => {
       // DELETE THIS TEST ONCE IT COMPILES
 			const factory: <%= moduleNameNoDash %>SearchOptionsFactory = TestBed.get(<%= moduleNameNoDash %>SearchOptionsFactory);
-			const options = factory.create(mockConfig);
+			const options = factory.create({});
 			expect(options).toBeDefined();
 		});
 	});
 
 	describe('actionMenu', () => {
-		let options: <%= moduleNameNoDash %>SearchOptions = null;
+		let <%= moduleNameCamel %>SearchOptions: <%= moduleNameNoDash %>SearchOptions = null;
 		let actionMenu: any = null;
     const mockGridView: I<%= moduleNameNoDash %>SearchResultGridView = {
     			agency: { value: 'agency', id: 234 },
@@ -139,8 +144,8 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 
     		beforeEach(() => {
     			const factory: <%= moduleNameNoDash %>SearchOptionsFactory = TestBed.get(<%= moduleNameNoDash %>SearchOptionsFactory);
-    			options = factory.create(mockConfig);
-    			actionMenu = options.ctrlOptions.gridOptions.columnDefs[0].actionMenu.items;
+    			<%= moduleNameCamel %>SearchOptions = factory.create({});
+    			actionMenu = <%= moduleNameCamel %>SearchOptions.ctrlOptions.gridOptions.columnDefs[0].actionMenu.items;
     		});
 
     		it('should have the action menu items defined', () => {
@@ -174,7 +179,26 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
     				};
     				expect(openOption.isHidden(rowEntity)).toBeTruthy();
     				expect(permissionService.hasAgencyPermission).not.toHaveBeenCalled();
-    			});
+          });
+
+          describe('beforeNavigation', () => {
+            it('should have the correct breadcrumb value', () => {
+              const openOption = actionMenu[0];
+              const rowEntity = {
+                row: {
+                  entity: mockGridView
+                }
+              };
+              const breadcrumbService: BreadcrumbService = TestBed.get(BreadcrumbService);
+              let breadcrumbListItems: IBreadcrumb = null;
+              <%= moduleNameCamel %> SearchOptions.ctrlOptions.gridOptions.dataFn({});
+              breadcrumbService.updateCurrentBreadcrumb = jasmine.createSpy('updateCurrentBreadcrumb').and.callFake(items => {
+                return breadcrumbListItems = items;
+              });
+              expect(openOption.beforeNavigation(rowEntity));
+              expect(breadcrumbListItems.listItems.length).not.toBe(0);
+            });
+          });
     		});
     		describe('audit trail', () => {
     			it('should return the correct displayText for audit trail', () => {
@@ -238,7 +262,7 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 
 		beforeEach(() => {
 			const factory: <%= moduleNameNoDash %>SearchOptionsFactory = TestBed.get(<%= moduleNameNoDash %>SearchOptionsFactory);
-			options = factory.create(mockConfig);
+			options = factory.create({});
 		});
 
 		it('should call the pageDetailService', async(() => {
@@ -253,7 +277,7 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 
 		beforeEach(() => {
 			const factory: <%= moduleNameNoDash %>SearchOptionsFactory = TestBed.get(<%= moduleNameNoDash %>SearchOptionsFactory);
-			options = factory.create(mockConfig);
+			options = factory.create({});
 		});
 		it('should create the <%= moduleNameNoDash %>SearchAgency field with options', () => {
 			const field = options.createField('', <IPageField>{ id: DisplayField.<%= moduleNameNoDash %>SearchAgency });

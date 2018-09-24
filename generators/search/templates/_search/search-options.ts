@@ -1,39 +1,39 @@
 import {
-    Observable
+	Observable
 } from 'rxjs/Observable';
 
 import {
-    ErrorService,
-    IPageDetail,
-    IPageField,
-    PageDetailService,
-    PageType,
-    PermissionType,
-    RecordLockAgent,
-    SearchOptions,
-    SecurityComponent,
-    UsageType,
-    UserPermissionService,
-    UserService
+	ErrorService,
+	IPageDetail,
+	IPageField,
+	PageDetailService,
+	PageType,
+	PermissionType,
+	RecordLockAgent,
+	SearchOptions,
+	SecurityComponent,
+	UsageType,
+	UserPermissionService,
+	UserService
 } from '@nwps/common';
 import {
-    ArrayUtility,
-    BreadcrumbService,
-    FormInteropService,
-    IBreadcrumbListItem,
-    IField,
-    MessageUtility
+	ArrayUtility,
+	BreadcrumbService,
+	FormInteropService,
+	IBreadcrumbListItem,
+	IField,
+	MessageUtility
 } from '@nwps/core';
 import {
-    DisplayField,
-    GridIdentifiers
+	DisplayField,
+	GridIdentifiers
 } from '@nwps/records';
 
 import {
-    I<%= moduleNameNoDash %>SearchResultGridView
+	I<%= moduleNameNoDash %>SearchResultGridView
 } from '../contracts/<%= moduleName %>-search-result-grid-view.interface';
 import {
-    <%= moduleNameNoDash %>Agent
+	<%= moduleNameNoDash %>Agent
 } from '../shared/<%= moduleName %>.agent';
 
 export class <%= moduleNameNoDash %>SearchOptions extends SearchOptions {
@@ -41,17 +41,17 @@ export class <%= moduleNameNoDash %>SearchOptions extends SearchOptions {
 	private _recordLockId: string;
 
 	constructor(
-		private _breadcrumbService: BreadcrumbService,
+		breadcrumbService: BreadcrumbService,
 		private _config: any,
 		_errorService: ErrorService,
 		private _formInteropService: FormInteropService,
-    private _<%= moduleNameCamel %>Agent: <%= moduleNameNoDash %>Agent,
-    private _messageBoxService: any,
+		private _<%= moduleNameCamel %>Agent: <%= moduleNameNoDash %>Agent,
+		private _messageBoxService: any,
 		private _pageDetailService: PageDetailService,
 		private _recordLockAgent: RecordLockAgent,
 		private _userPermissionService: UserPermissionService,
-    private _userService: UserService,
-    private AgencyComboboxController: any,
+		private _userService: UserService,
+		private AgencyComboboxController: any,
 	) {
 		super(_errorService);
 		this._ctrlOptions.identifier = GridIdentifiers.<%= moduleNameCamel %>Search;
@@ -81,10 +81,10 @@ export class <%= moduleNameNoDash %>SearchOptions extends SearchOptions {
 								routeCommands: this.getDetailRoute(x)
 							};
 						});
-						const breadcrumb = this._breadcrumbService.getCurrentBreadcrumb();
+						const breadcrumb = breadcrumbService.getCurrentBreadcrumb();
 						breadcrumb.listItems = listItems;
 						breadcrumb.selectedListItem = listItems.find(x => x.sourceId === options.row.entity.id);
-						this._breadcrumbService.updateCurrentBreadcrumb(breadcrumb);
+						breadcrumbService.updateCurrentBreadcrumb(breadcrumb);
 					},
 					getRoute: options => {
 						return this.getDetailRoute(options.row.entity);
@@ -93,7 +93,7 @@ export class <%= moduleNameNoDash %>SearchOptions extends SearchOptions {
 				{
 					displayText: 'Audit Trail',
 					isHidden: options => {
-            if (!options || !options.row || !options.row.entity)
+			if (!options || !options.row || !options.row.entity)
 							return true;
 						const rowEntity: I<%= moduleNameNoDash %>SearchResultGridView = options.row.entity;
 						const <%= moduleNameCamel %>Agency = rowEntity.agency.id;
