@@ -78,7 +78,7 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
         {
           provide: <%= moduleNameNoDash %>Agent,
           useValue: {
-            delete<%= moduleNameNoDash %>: jasmine.createSpy('delete<%= moduleNameNoDash %>'),
+            delete<%= moduleNameNoDash %>: jasmine.createSpy('delete<%= moduleNameNoDash %>').and.returnValue(of({})),
             get<%= moduleNameNoDash %> SearchResultGridViews: jasmine.createSpy('get<%= moduleNameNoDash %>SearchResultGridViews').and.returnValue(of(searchResultGridViews))
           }
         },
