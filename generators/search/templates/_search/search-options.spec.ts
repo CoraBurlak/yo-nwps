@@ -1,6 +1,8 @@
 import {
-    async,
-    TestBed
+  async,
+  fakeAsync,
+  TestBed,
+  tick
 } from '@angular/core/testing';
 
 import {
@@ -256,6 +258,59 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
             };
             expect(deleteOption.isHidden(rowEntity)).toBeTruthy();
             expect(permissionService.hasAgencyPermission).not.toHaveBeenCalled();
+          });
+
+          describe('callBack', () => {
+            it('should call to confirmWithReasons on the messageBoxService', fakeAsync(() => {
+              const messageBoxService: any = TestBed.get('message-box-service');
+              const rowEntity = {
+                row: {
+                  entity: mockGridView
+                }
+              };
+              deleteOption.callBack(rowEntity);
+              tick();
+              expect(messageBoxService.confirmWithReasons).toHaveBeenCalled();
+            }));
+
+            it('should acquireLock on the recordLockAgent', fakeAsync(() => {
+              const recordLockAgent: RecordLockAgent = TestBed.get(RecordLockAgent);
+              const rowEntity = {
+                row: {
+                  entity: mockGridView
+                }
+              };
+              deleteOption.callBack(rowEntity);
+              tick();
+              expect(recordLockAgent.acquireLock).toHaveBeenCalledWith({
+                primaryRecordId: mockGridView.id,
+                usageTypeId: UsageType.<%= moduleNameNoDash %>
+              });
+            }));
+
+            it('should delete the <%= moduleNameCamel %> from the <%= moduleNameCamel %>Agent', fakeAsync(() => {
+              const rowEntity = {
+                row: {
+                  entity: mockGridView
+                }
+              };
+              const <%= moduleNameCamel %>Agent: <%= moduleNameNoDash %>Agent = TestBed.get(<%= moduleNameNoDash %>Agent);
+              deleteOption.callBack(rowEntity);
+              tick();
+              expect(<%= moduleNameCamel %>Agent.delete<%= moduleNameNoDash %>).toHaveBeenCalled();
+            }));
+
+            it('should release the locks from the recordLockAgent', fakeAsync(() => {
+              const rowEntity = {
+                row: {
+                  entity: mockGridView
+                }
+              };
+              const recordLockAgent: RecordLockAgent = TestBed.get(RecordLockAgent);
+              deleteOption.callBack(rowEntity);
+              tick();
+              expect(recordLockAgent.revokeLocks).toHaveBeenCalled();
+            }));
           });
         });
   });
