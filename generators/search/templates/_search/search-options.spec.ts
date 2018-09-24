@@ -41,6 +41,9 @@ import {
 } from './<%= moduleName %>-search-options.factory';
 
 describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () => {
+  const mockConfig = {
+    searchFn: jasmine.createSpy('searchFn');
+  };
   const searchResultGridViews: ISearchResponse<I<%= moduleNameNoDash %>SearchResultGridView> = {
     totalResults: '2',
     facets: null,
@@ -130,7 +133,7 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
     it('should compile the options', () => {
       // DELETE THIS TEST ONCE IT COMPILES
       const factory: <%= moduleNameNoDash %>SearchOptionsFactory = TestBed.get(<%= moduleNameNoDash %>SearchOptionsFactory);
-      const <%= moduleNameCamel %> SearchOptions = factory.create({});
+      const <%= moduleNameCamel %> SearchOptions = factory.create(mockConfig);
       expect(<%= moduleNameCamel %> SearchOptions).toBeDefined();
     });
   });
@@ -144,7 +147,7 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 
         beforeEach(() => {
           const factory: <%= moduleNameNoDash %>SearchOptionsFactory = TestBed.get(<%= moduleNameNoDash %>SearchOptionsFactory);
-          <%= moduleNameCamel %>SearchOptions = factory.create({});
+          <%= moduleNameCamel %>SearchOptions = factory.create(mockConfig);
           actionMenu = <%= moduleNameCamel %>SearchOptions.ctrlOptions.gridOptions.columnDefs[0].actionMenu.items;
         });
 
@@ -262,7 +265,7 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 
     beforeEach(() => {
       const factory: <%= moduleNameNoDash %>SearchOptionsFactory = TestBed.get(<%= moduleNameNoDash %>SearchOptionsFactory);
-      <%= moduleNameCamel %>SearchOptions = factory.create({});
+      <%= moduleNameCamel %>SearchOptions = factory.create(mockConfig);
     });
 
     it('should call the pageDetailService', async(() => {
@@ -277,7 +280,7 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
 
     beforeEach(() => {
       const factory: <%= moduleNameNoDash %>SearchOptionsFactory = TestBed.get(<%= moduleNameNoDash %>SearchOptionsFactory);
-      <%= moduleNameCamel %>SearchOptions = factory.create({});
+      <%= moduleNameCamel %>SearchOptions = factory.create(mockConfig);
     });
     it('should create the <%= moduleNameNoDash %>SearchAgency field with options', () => {
       const field = <%= moduleNameCamel %> SearchOptions.createField('', <IPageField>{ id: DisplayField.<%= moduleNameNoDash %>SearchAgency });
