@@ -113,7 +113,7 @@ describe('<%= moduleNameNormalCap %>: <%= moduleNameNoDash %>SearchOptions', () 
         {
           provide: 'message-box-service',
           useValue: {
-            confirmWithReasons: jasmine.createSpy('confirmWithReasons').and.returnValue(Promise.resolve(null))
+            confirmWithReasons: jasmine.createSpy('confirmWithReasons').and.returnValue(Promise.resolve({ reason: 'deleted' }))
           }
         },
         {
