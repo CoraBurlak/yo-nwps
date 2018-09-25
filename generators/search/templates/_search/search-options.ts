@@ -83,7 +83,7 @@ export class <%= moduleNameNoDash %>SearchOptions extends SearchOptions {
 						});
 						const breadcrumb = breadcrumbService.getCurrentBreadcrumb();
 						breadcrumb.listItems = listItems;
-						breadcrumb.selectedListItem = listItems.find(x => x.sourceId === options.row.entity.id);
+            breadcrumb.selectedListItem = listItems.find(x => x.sourceId === rowEntity.id);
 						breadcrumbService.updateCurrentBreadcrumb(breadcrumb);
 					},
 					getRoute: options => {
@@ -93,16 +93,16 @@ export class <%= moduleNameNoDash %>SearchOptions extends SearchOptions {
 				{
 					displayText: 'Audit Trail',
 					isHidden: options => {
-			if (!options || !options.row || !options.row.entity)
-							return true;
-						const rowEntity: I<%= moduleNameNoDash %>SearchResultGridView = options.row.entity;
-						const <%= moduleNameCamel %>Agency = rowEntity.agency.id;
-						return !this._userPermissionService.hasAgencyPermission(SecurityComponent.FieldLevelAuditSearch, <%= moduleNameCamel %>Agency, PermissionType.Execute);
-					},
-					getRoute: options => {
-						return this.getAuditRoute(options.row.entity);
-					}
-				},
+            if (!options || !options.row || !options.row.entity)
+                    return true;
+                  const rowEntity: I<%= moduleNameNoDash %>SearchResultGridView = options.row.entity;
+                  const <%= moduleNameCamel %>Agency = rowEntity.agency.id;
+                  return !this._userPermissionService.hasAgencyPermission(SecurityComponent.FieldLevelAuditSearch, <%= moduleNameCamel %>Agency, PermissionType.Execute);
+                },
+                getRoute: options => {
+                  return this.getAuditRoute(options.row.entity);
+                }
+				  },
 				{
 					displayText: 'Delete',
 					isHidden: options => {
