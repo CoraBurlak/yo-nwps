@@ -42,7 +42,6 @@ export class <%= moduleNameNoDash %>SearchComponent extends BaseFieldHelpCompone
 	public ngOnInit(): void {
 		this.searchComponentOptions = {
 			addRoute: <%= moduleNameCamel %>ChildRoutePaths.<%= moduleNameNoDash %>Add,
-			errorContainerConfig: { component: '<%= moduleNameCamel %>RequestSearch' },
 			showAdd: () => this._userPermissionService.hasAnyPermission([SecurityComponent.<%= moduleNameNoDash %>], PermissionType.Add),
 			searchInfo: RecordsSearchUsageInfo[UsageType.<%= moduleNameNoDash %>]
 		};

@@ -10,7 +10,6 @@ module.exports = class extends Generator {
 
     this.createNwpsFile = function(filePath, destinationPath, sectionName) {
       var moduleName = this.options.moduleName;
-      var isBaseDefined = Boolean(this.options.isBase);
       const noDash = name =>
         name
           .split('-')
@@ -46,8 +45,7 @@ module.exports = class extends Generator {
           sectionName: sectionName,
           sectionNameNoDash: noDash(sectionName),
           sectionNameCaps: noDashCaps(sectionName),
-          sectionNameCamel: nameCamel(sectionName),
-          isBase: isBaseDefined
+          sectionNameCamel: nameCamel(sectionName)
         }
       );
     };
@@ -97,6 +95,8 @@ module.exports = class extends Generator {
       `${newFolderBase}/${moduleName}-${sectionName}-detail.interface.ts`,
       sectionName
     );
+    var isBaseDefined = Boolean(this.options.isBase);
+
     // Entry files
     folderBase = '_entry';
     newFolderBase = resetBase;
@@ -123,6 +123,29 @@ module.exports = class extends Generator {
       `${newFolderBase}/${sectionName}/${view}/${moduleName}-${sectionName}-view.component.spec.ts`,
       sectionName
     );
+    if(isBaseDefined) {
+      this.createNwpsFile(
+        `${edit}/edit.component.ts`,
+        `${newFolderBase}/${sectionName}/${edit}/${moduleName}-${sectionName}-edit.component.ts`,
+        sectionName
+      );
+      this.createNwpsFile(
+        `${edit}/edit.component.spec.ts`,
+        `${newFolderBase}/${sectionName}/${edit}/${moduleName}-${sectionName}-edit.component.spec.ts`,
+        sectionName
+      );
+    } else {
+      this.createNwpsFile(
+        `${edit}/edit-non-general.component.ts`,
+        `${newFolderBase}/${sectionName}/${edit}/${moduleName}-${sectionName}-edit.component.ts`,
+        sectionName
+      );
+      this.createNwpsFile(
+        `${edit}/edit-non-general.component.spec.ts`,
+        `${newFolderBase}/${sectionName}/${edit}/${moduleName}-${sectionName}-edit.component.spec.ts`,
+        sectionName
+      );
+    }
     this.createNwpsFile(
       `${edit}/edit.component.ts`,
       `${newFolderBase}/${sectionName}/${edit}/${moduleName}-${sectionName}-edit.component.ts`,
