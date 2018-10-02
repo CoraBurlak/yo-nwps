@@ -87,7 +87,7 @@ describe('<%= moduleNameNoDash %>: <%= moduleNameNoDash %><%= sectionNameNoDashS
 					provide: <%= moduleNameNoDash %>Agent,
 					useValue: {
 						get<%= sectionNameNoDashSingular %>Details: jasmine.createSpy('get<%= sectionNameNoDashSingular %>Details').and.returnValue(of({})),
-						get<%= sectionNameNoDashSingular %>: jasmine.createSpy('get<%= sectionNameNoDashSingular %>').and.returnValue(of({})),
+						get<%= sectionNameNoDashSingular %>Detail: jasmine.createSpy('get<%= sectionNameNoDashSingular %>Detail').and.returnValue(of({})),
 						save<%= sectionNameNoDashSingular %>: jasmine.createSpy('save<%= sectionNameNoDashSingular %>').and.returnValue(of({})),
 						delete<%= sectionNameNoDashSingular %>: jasmine.createSpy('delete<%= sectionNameNoDashSingular %>').and.returnValue(of({}))
 					}
