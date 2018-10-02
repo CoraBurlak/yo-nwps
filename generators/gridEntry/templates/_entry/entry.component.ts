@@ -38,7 +38,7 @@ import {
 } from '../../../contracts/<%= moduleName %>-<%= sectionNameSingular %>.interface';
 import {
     <%= moduleNameNoDash %>Agent
-} from '../../../shared/<%= moduleName %>.agent';
+} from '../../../<%= moduleName %>.agent';
 
 @Component({
 	selector: '<%= moduleName %>-<%= sectionNameSingular %>s-entry',
