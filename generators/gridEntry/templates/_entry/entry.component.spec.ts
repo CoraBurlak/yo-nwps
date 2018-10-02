@@ -165,7 +165,7 @@ describe('<%= moduleNameNoDash %>: <%= moduleNameNoDash %><%= sectionNameNoDashS
 			};
 			createComponent();
 			gridEntryOptions.getEntryForEdit(gridView).subscribe();
-			expect(agent.get<%= sectionNameNoDashSingular %>).toHaveBeenCalledWith(123, 234);
+			expect(agent.get<%= sectionNameNoDashSingular %>Detail).toHaveBeenCalledWith(123, 234);
 		}));
 
 		describe('createField', () => {
